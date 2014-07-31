@@ -1,0 +1,17 @@
+OpenDataPlane (http://opendataplane.org, ODP) is open source (BSD-license)
+framework to support networking on different platforms and architectures.
+Current daq module implements odp functionality to listen for
+traffic on hardware optimized NICs.
+
+How to build:
+	autoreconf -ivf
+	./configure
+	make
+
+Requirements:
+	1. DAQ should be installed:
+		apt-get install libdaq-dev
+	or built from sources:
+		https://www.snort.org/downloads/snort/daq-2.0.2.tar.gz
+
+	2. OpenDataPlane should be installed to standard path.
