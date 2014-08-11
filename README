@@ -10,8 +10,12 @@ How to build:
 
 Requirements:
 	1. DAQ should be installed:
-		apt-get install libdaq-dev
+		apt-get install libdaq-dev libdaq0 snort
+		daq version has to be 2.0.2
 	or built from sources:
 		https://www.snort.org/downloads/snort/daq-2.0.2.tar.gz
 
 	2. OpenDataPlane should be installed to standard path.
+
+Run:
+	snort --daq-dir=/usr/local/lib/daq --daq=odp -i eth0
