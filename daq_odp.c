@@ -194,6 +194,7 @@ static int odp_daq_acquire(void *handle, int cnt, DAQ_Analysis_Func_t callback, 
 	int i;
 	odp_packet_t pkt_tbl[MAX_PKT_BURST];
 	int pkts;
+	int pkt_burst;
 
 	odpc = (ODP_Context_t *) handle;
 	if (!odpc)
@@ -201,6 +202,11 @@ static int odp_daq_acquire(void *handle, int cnt, DAQ_Analysis_Func_t callback, 
 
 	if (odpc->state != DAQ_STATE_STARTED)
 		return DAQ_ERROR;
+
+	if (cnt > 0)
+		pkt_burst = cnt;
+	else
+		pkt_burst = MAX_PKT_BURST;
 
 	while (1)
 	{
@@ -211,7 +217,7 @@ static int odp_daq_acquire(void *handle, int cnt, DAQ_Analysis_Func_t callback, 
 			return 0;
 		}
 
-		pkts = odp_pktio_recv(odpc->pktio, pkt_tbl, MAX_PKT_BURST);
+		pkts = odp_pktio_recv(odpc->pktio, pkt_tbl, pkt_burst);
 		if (pkts <= 0) {
 			return 0;
 		}
