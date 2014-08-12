@@ -3,7 +3,7 @@
 
 AC_PREREQ(2.62)
 AC_INIT([odp-daq-module], [0.1], [maxim.uvarov@linaro.org])
-AM_INIT_AUTOMAKE([daq], [0.1])
+AM_INIT_AUTOMAKE()
 AC_CONFIG_MACRO_DIR([m4])
 AC_CONFIG_SRCDIR([daq_odp.c])
 AC_CONFIG_HEADERS([config.h])
@@ -37,8 +37,32 @@ AC_FUNC_MALLOC
 AC_CHECK_FUNCS([memset strchr strdup strerror strtol])
 AC_SEARCH_LIBS([timer_createm],[rt posix4])
 
+AC_ARG_WITH([odp-path],
+AC_HELP_STRING([--with-odp-path=DIR Path to odp libs and headers],
+               [(or in the default path if not specified).]),
+[ODP_PATH=$withval
+CFLAGS="$CFLAGS -I$ODP_PATH/include"
+LDFLAGS="$LDFLAGS -L$ODP_PATH/lib"
+],[])
 # Substitutions
+
+AC_SUBST([LIBS])
+AC_SUBST([AM_CFLAGS])
+AC_SUBST([CFLAGS])
+AC_SUBST([AM_LDFLAGS])
 
 # Output
 AC_CONFIG_FILES([Makefile])
 AC_OUTPUT
+AC_MSG_RESULT([
+	$PACKAGE $VERSION
+	========
+
+
+	compiler:		${CC}
+	cflags:			${CFLAGS}
+	am_cflags:		${AM_CFLAGS}
+	ldflags:		${LDFLAGS}
+	am_ldflags:		${AM_LDFLAGS}
+
+])
