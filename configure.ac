@@ -2,7 +2,7 @@
 # Process this file with autoconf to produce a configure script.
 
 AC_PREREQ(2.62)
-AC_INIT([odp-daq-module], [0.1], [maxim.uvarov@linaro.org])
+AC_INIT([daq], [0.1], [maxim.uvarov@linaro.org])
 AM_INIT_AUTOMAKE()
 AC_CONFIG_MACRO_DIR([m4])
 AC_CONFIG_SRCDIR([daq_odp.c])
