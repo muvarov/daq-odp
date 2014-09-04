@@ -29,10 +29,10 @@
 #include "sfbpf.h"
 
 #include <odp.h>
-#include <helper/odp_linux.h>
-#include <helper/odp_packet_helper.h>
-#include <helper/odp_eth.h>
-#include <helper/odp_ip.h>
+#include <odph_linux.h>
+#include <odph_packet.h>
+#include <odph_eth.h>
+#include <odph_ip.h>
 
 #define MAX_WORKERS            1
 #define SHM_PKT_POOL_SIZE      (512*2048)

@@ -41,7 +41,7 @@ AC_ARG_WITH([odp-path],
 AC_HELP_STRING([--with-odp-path=DIR Path to odp libs and headers],
                [(or in the default path if not specified).]),
 [ODP_PATH=$withval
-CFLAGS="$CFLAGS -I$ODP_PATH/include"
+CFLAGS="$CFLAGS -I$ODP_PATH/include -I$ODP_PATH/include/helper"
 LDFLAGS="$LDFLAGS -L$ODP_PATH/lib"
 ],[])
 # Substitutions
