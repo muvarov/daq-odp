@@ -97,7 +97,7 @@ static int odp_daq_initialize(const DAQ_Config_t *config, void **ctxt_ptr, char 
 
 	/* Create packet pool */
 	pool_base = odp_shm_reserve("shm_packet_pool",
-				    SHM_PKT_POOL_SIZE, ODP_CACHE_LINE_SIZE);
+				    SHM_PKT_POOL_SIZE, ODP_CACHE_LINE_SIZE, 0);
 	if (pool_base == NULL) {
 		ODP_ERR("Error: packet pool mem alloc failed.\n");
 		rval = DAQ_ERROR_NOMEM;
