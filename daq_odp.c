@@ -58,8 +58,6 @@ static int odp_daq_initialize(const DAQ_Config_t *config, void **ctxt_ptr, char 
 	int rval = DAQ_ERROR;
 	int thr_id;
 	odp_buffer_pool_t pool;
-	odp_pktio_params_t params;
-	socket_params_t *sock_params = &params.sock_params;
 	odp_queue_param_t qparam;
 	char inq_name[ODP_QUEUE_NAME_LEN];
 	int ret;
@@ -118,10 +116,7 @@ static int odp_daq_initialize(const DAQ_Config_t *config, void **ctxt_ptr, char 
 	odp_buffer_pool_print(pool);
 
 	/* Open a packet IO instance for this thread */
-	sock_params->type = ODP_PKTIO_TYPE_SOCKET_MMAP;
-	sock_params->fanout = 0;
-
-	odpc->pktio = odp_pktio_open(odpc->device, pool, &params);
+	odpc->pktio = odp_pktio_open(odpc->device, pool);
 	if (odpc->pktio == ODP_PKTIO_INVALID) {
 		ODP_ERR("  [%02i] Error: pktio create failed\n", 1 /*thr*/);
 		rval = DAQ_ERROR_NODEV;
