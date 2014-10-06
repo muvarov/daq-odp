@@ -56,7 +56,6 @@ static int odp_daq_initialize(const DAQ_Config_t *config, void **ctxt_ptr, char 
 {
 	ODP_Context_t *odpc;
 	int rval = DAQ_ERROR;
-	int thr_id;
 	odp_buffer_pool_t pool;
 	odp_queue_param_t qparam;
 	char inq_name[ODP_QUEUE_NAME_LEN];
@@ -90,8 +89,10 @@ static int odp_daq_initialize(const DAQ_Config_t *config, void **ctxt_ptr, char 
 	}
 
 	/* Init this thread */
-	thr_id = odp_thread_create(0);
-	odp_init_local(thr_id);
+	if (odp_init_local()) {
+		ODP_ERR("Error: ODP local init failed.\n");
+		exit(EXIT_FAILURE);
+	}
 
 	/* Create packet pool */
 	pool_base = odp_shm_reserve("shm_packet_pool",
