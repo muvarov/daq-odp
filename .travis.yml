@@ -1,0 +1,14 @@
+language: c
+before_install:
+- sudo apt-get update -qq
+- sudo apt-get purge snort snort-common
+- sudo apt-get clean
+- sudo apt-get autoremove
+- sudo dpkg --configure -a
+- sudo apt-get update
+- sudo apt-get install -y libdaq-dev libdaq0 snort
+compiler:
+  - gcc
+  - clang
+# Change this to your needs
+script: sh ./ci-script.sh
